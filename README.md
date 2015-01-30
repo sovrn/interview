@@ -29,3 +29,8 @@ Notes:
 - This project uses Backbone.localstorage to integrate HTML5's localstorage with Backbone's sync methods
 - If you have questions or run into problems, don't worry! Please let us know so that we can continue to improve this project.
     - mcollins@sovrn.com
+
+Contact information:
+- Steven Wade
+- stevenmwade@gmail.com
+- 303.775.7951

@@ -24,7 +24,12 @@ define([
         
         events: {
             "click #create" : "create",
-            "click a.note"  : "edit"
+            "click a.note"  : "edit",
+            "click .delete" : "removeNote",
+            "click #clear-all" : "clearAll",
+            "click .title" : "sortTitle",
+            "click .body" : "sortBody"
+
         },
         
         create: function () {
@@ -42,6 +47,9 @@ define([
                 noteId = jQuery(event.target).data('note-id'),
                 note = this.collection.get(noteId);
             
+            console.log('noteId: ', noteId);
+            console.log('note: ', note);
+
             this.editView = new EditView({
                 el: self.$modalEl,
                 collection: self.collection,
@@ -52,8 +60,11 @@ define([
         
         initialize: function (options) {
             var self = this;
+
             
             this.$modalEl = jQuery(options.modalEl);
+
+            console.log('this.$modalEl: ', this.$modalEl)
             
             this.collection.fetch({
                 complete: function () {
@@ -72,6 +83,36 @@ define([
             this.$el.html(this.template({
                 notes: self.collection
             }));
+        },
+
+        /////////////////////////////////////////////////
+        // REMOVE NOTE, CLEAR ALL, SORT TITLE AND BODY //
+        /////////////////////////////////////////////////
+
+        removeNote: function() {
+            // Use same selector that grabs the ID from the note
+            // to edit and remove the note from the collection
+            var noteId = jQuery(event.target).data('note-id'),
+                note = this.collection.get(noteId);
+
+            this.collection.remove(note).save();
+        },
+
+        clearAll: function() {
+            // Reset collection
+            this.collection.reset().save();
+        },
+
+        sortTitle: function() {
+            // Set comparator to title and use native sort
+            this.collection.comparator = "title";
+            this.collection.sort('title');
+        },
+
+        sortBody: function() {
+            // Set comparator to body and use native sort
+            this.collection.comparator = "body";
+            this.collection.sort('body');
         }
     });
 
