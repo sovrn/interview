@@ -33,8 +33,11 @@ define([
             }));
             
             this.$title = jQuery('#title');
+            console.log('this.$title: ', this.$title);
             this.$body  = jQuery('#body');
+            console.log('this.$body: ', this.$body);
             this.$save  = jQuery('#save');
+            console.log('this.$save: ', this.$save);
             
             this.$el.dialog({
                 dialogClass: "no-close"
@@ -73,6 +76,7 @@ define([
             if (this.validate()) {
                 this.model.set('title', this.$title.val());
                 this.model.set('body', this.$body.val());
+                console.log('this.model: ', this.model);
                 this.model.save();
                 
                 this.collection.add(this.model);
