@@ -21,7 +21,7 @@ Your assignment:
 8. Add your contact info to this file
 9. Commit your changes
 10. Make a pull request
-11. Get a job!
+11. Interview with sovrn
 
 
 Notes:
