@@ -24,7 +24,10 @@ define([
         
         events: {
             "click #create" : "create",
-            "click a.note"  : "edit"
+            "click a.note"  : "edit",
+            "click #clear" : "clear",
+            "click button.remove"  : "remove"
+
         },
         
         create: function () {
@@ -49,6 +52,25 @@ define([
             });
             
         },
+	   // added function to remove all notes
+	   clear: function () {
+            var self = this;
+            var notes = self.collection;
+                
+            self.collection.models.length = 0 ; 
+    		  this.collection.save(); 		
+		 self.render();
+
+        },
+        // added function to remove a single note
+        remove: function (event) {
+            var self = this,
+                noteId = jQuery(event.target).data('note-id');
+            this.collection.remove(noteId);
+		 this.collection.save(); 	
+            self.render();
+        },
+
         
         initialize: function (options) {
             var self = this;
